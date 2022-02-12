@@ -9,7 +9,7 @@ api = Api(app)
 
 api.add_resource(channel.UpsertChannel, "/api/v1/channel/")
 api.add_resource(channel.GetChannelKeyword, "/api/v1/channel/<string:channel_id>")
-
+api.add_resource(channel.AddUserToChannel, '/api/v1/channel/add/')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")

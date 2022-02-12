@@ -6,7 +6,7 @@ from slack_sdk.errors import SlackApiError
 logger = logging.getLogger(__name__)
 
 def send_message(client, channel_id, msg_type, message):
-
+    print("THIS WAS CALLED ", client, channel_id, msg_type, message)
     try:
         result = None
         # Call the chat.postMessage method using the WebClient
@@ -18,11 +18,13 @@ def send_message(client, channel_id, msg_type, message):
                 text=f"{post_title}\n{post_url}"
             )
         if msg_type == "message":
+            print("YO IT IS A MESSAGE")
             result = client.chat_postMessage(
                 channel=channel_id, 
                 text=f"{message}"
             )
         logger.info(result)
+        return result
 
     except SlackApiError as e:
         logger.error(f"Error posting message: {e}")
