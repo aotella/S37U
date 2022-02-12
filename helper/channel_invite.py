@@ -1,4 +1,3 @@
-from abc import get_cache_token
 from S37U.helper import send_message
 import logging
 

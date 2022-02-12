@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, Response
-from S37U.helper import channel_invite
+from S37U.helper import channel_invite, channel_keywords
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import json
@@ -30,7 +30,8 @@ class UpsertChannel(Resource):
 class GetChannelKeyword(Resource):
     def get(self, channel_id):
         print(channel_id)
-        return_data = {"status":"success"} #Add return from function
+
+        return_data = channel_keywords.get_channel_info(channel_id) #Add return from function
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
         else:
@@ -42,9 +43,7 @@ class AddUserToChannel(Resource):
     def post(self):
         request_data = request.json
         client = create_slack_client()
-        print("WE ARE HERE")
         return_data = channel_invite.send_channel_invitation(client, request_data)
-        # return_data = {"status":"success"} #Add return from function
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
         else:
