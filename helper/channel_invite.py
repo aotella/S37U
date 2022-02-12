@@ -1,5 +1,6 @@
 from S37U.helper import send_message
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -7,23 +8,25 @@ def get_channel_id(channel_name):
     pass
 
 
+def get_channel_id_by_interest(channel_keyword):
+    with open('S37U/common/interest.json') as f:
+        channel_data = json.loads(f.read())
+    print(channel_data[channel_keyword])
+    return channel_data[channel_keyword]["channel_id"]
+
 def send_channel_invitation(client, request_json):
 
-    channel_id = request_json.get("channel_id", "")
-    channel_name = request_json.get("channel_name", "")
-    user_name = request_json.get("user_name")
+    channel_id_list = []
+    interests = request_json.get("interests", "")
+    user_id = request_json.get("user_id", "")
+    for interest in interests:
+        channel_id_list = channel_id_list + get_channel_id_by_interest(interest)
 
-    if channel_id != "":
-        pass
-    elif channel_id == "" and channel_name != "":
-        channel_id = get_channel_id(channel_name)
-    else:
-        return {"status": "failure", "message": "provide channel_id or channel_name", "status_code": 400}
-
-    message = f"Hi <!channel>,  <@{user_name}> wants to join your channel please invite them and greet them."
     try:
-        result = send_message.send_message(client, channel_id, "message", message)
-        logger.info(result)
+        for channel_id in channel_id_list:
+            message = f"Hi <!channel>,  <@{user_id}> wants to join your channel please invite them and greet them."
+            result = send_message.send_message(client, channel_id, "message", message)
+            logger.info(result)
         return {"status": "success"} 
     except Exception as e:
         logger.info(e)

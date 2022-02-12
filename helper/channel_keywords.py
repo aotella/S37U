@@ -5,7 +5,7 @@ import json
 logger = logging.getLogger(__name__)
 
 def get_channel_keywords_info(channel_keyword):
-    with open('S37U/common/channel_config.json') as f:
+    with open('S37U/common/invite.json') as f:
         channel_data = json.loads(f.read())
 
     

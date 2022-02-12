@@ -1,0 +1,12 @@
+{
+    "C032PHTUS8L": {
+        "channel_name": "gaming",
+        "keyword": ["Counter Strike", "FIFA 22", "God of War"],
+        "subreddit": ["globaloffensive", "gaming1"]
+    },
+    "C032JAQRRU5": {
+        "channel_ids": "football", 
+        "keyword": ["soccer", "manchester united"],
+        "subreddit": ["soccer", "reddevil"]       
+    }
+}
