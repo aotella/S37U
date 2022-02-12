@@ -25,7 +25,7 @@ def get_reddit_post(subreddit):
 
     post_data = {}
     reddit = praw.Reddit(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, user_agent=USER_AGENT)
-    top_posts = reddit.subreddit(subreddit).hot(limit=50)
+    top_posts = reddit.subreddit(subreddit).hot(limit=1, over_18=False)
     for post in top_posts:
         post_data["post_url"] = post.url
         post_data["post_title"] = post.title

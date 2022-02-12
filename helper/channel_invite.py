@@ -9,7 +9,7 @@ def get_channel_id(channel_name):
 
 
 def get_channel_id_by_interest(channel_keyword):
-    with open('S37U/common/interest.json') as f:
+    with open('S37U/common/interest-channel.json') as f:
         channel_data = json.loads(f.read())
     return channel_data[channel_keyword]["channel_ids"]
 

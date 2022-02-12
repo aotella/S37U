@@ -51,7 +51,7 @@ def get_interests(user_id):
 
 def get_channels_by_interest(interest):
 
-    with open('S37U/common/interest.json') as f:
+    with open('S37U/common/interest-channel.json') as f:
         interest_data = json.loads(f.read())
 
 
