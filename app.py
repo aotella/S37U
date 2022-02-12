@@ -1,14 +1,15 @@
 from flask import Flask, render_template
+from flask_restful import Api, Resource
+from S37U.views import channel
+
 app = Flask(__name__)
 
 # two decorators, same function
-@app.route('/')
-def index():
-    return render_template('index.html')
+api = Api(app)
 
-@app.route('/test')
-def symbol():
-    return "Testing route"
+api.add_resource(channel.UpsertChannel, "/api/v1/channel/")
+api.add_resource(channel.GetChannelKeyword, "/api/v1/channel/<string:channel_id>")
 
-if __name__ == '__main__':
-    app.run(debug=True, host="localhost", port=3000)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
