@@ -21,9 +21,7 @@ def send_message(client, channel_id, msg_type, message):
                 channel=channel_id, 
                 text=f"{message}"
             )
-            print(result.data)
         logger.info(result)
-        print(result.data)
         return result
 
     except SlackApiError as e:
