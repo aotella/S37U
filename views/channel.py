@@ -19,19 +19,16 @@ class UpsertChannel(Resource):
         request_data = request.json
         if request_data is None:
             return Response("Bad Request", status=400)
-        return_data = {"status":"success"} #Add return from function
+        return_data = {"status":"success"} 
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
 
         else:
             return Response(json.dumps(return_data), status=400)
 
-
 class GetChannelKeyword(Resource):
     def get(self, channel_id):
-        print(channel_id)
-
-        return_data = channel_keywords.get_channel_info(channel_id) #Add return from function
+        return_data = channel_keywords.get_channel_info(channel_id) 
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
         else:

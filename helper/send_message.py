@@ -17,7 +17,6 @@ def send_message(client, channel_id, msg_type, message):
                 text=f"{post_title}\n{post_url}"
             )
         if msg_type == "message":
-            print("YO IT IS A MESSAGE")
             result = client.chat_postMessage(
                 channel=channel_id, 
                 text=f"{message}"

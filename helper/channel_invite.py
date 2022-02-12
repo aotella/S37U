@@ -21,11 +21,8 @@ def send_channel_invitation(client, request_json):
         return {"status": "failure", "message": "provide channel_id or channel_name", "status_code": 400}
 
     message = f"Hi <!channel>,  <@{user_name}> wants to join your channel please invite them and greet them."
-    print(channel_id, user_name, message)
-
     try:
         result = send_message.send_message(client, channel_id, "message", message)
-        print(result)
         logger.info(result)
         return {"status": "success"} 
     except Exception as e:
