@@ -49,3 +49,13 @@ def get_interests(user_id):
         return {"status": "success", "data": users_interest}
 
 
+def get_channels_by_interest(interest):
+
+    with open('S37U/common/interest.json') as f:
+        interest_data = json.loads(f.read())
+
+
+    if interest_data == "":
+        return{"status": "failure", "message": "keyword not found"}
+
+    return {"status": "success", "data": interest_data[interest]}

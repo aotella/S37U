@@ -80,3 +80,13 @@ class GetAllChannelInfo(Resource):
             return Response(json.dumps(return_data), status=200)
         else:
             return Response(json.dumps(return_data), status=400)
+
+
+
+class GetChannelByInterests(Resource):
+    def get(self, interest):
+        return_data = interests.get_channels_by_interest(interest)
+        if return_data["status"] == "success":
+            return Response(json.dumps(return_data), status=200)
+        else:
+            return Response(json.dumps(return_data), status=400)
