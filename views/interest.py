@@ -1,8 +1,6 @@
-rom flask_restful import Resource
+from flask_restful import Resource
 from flask import request, Response
 from S37U.helper import interests
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
 import json
 
 

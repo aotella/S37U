@@ -1,1 +1,12 @@
-{"C032PHTUS8L": {"channel_name": "gaming", "keywords": ["Counter Strike", "FIFA 22", "God of War", "Left 4 Dead"], "subreddit": ["globaloffensive", "gaming1"]}, "C032JAQRRU5": {"channel_ids": "football", "keywords": ["soccer", "manchester united"], "subreddit": ["soccer", "reddevil"]}}
+{
+  "C032PHTUS8L": {
+    "channel_name": "gaming",
+    "keywords": ["Counter Strike", "FIFA 22", "God of War", "Left 4 Dead"],
+    "subreddits": ["globaloffensive", "gaming"]
+  },
+  "C032JAQRRU5": {
+    "channel_name": "football",
+    "keywords": ["soccer", "manchester united"],
+    "subreddits": ["soccer", "reddevil"]
+  }
+}

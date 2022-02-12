@@ -2,7 +2,6 @@ from flask_restful import Resource
 from flask import request, Response
 from S37U.helper import channel_invite, channel_keywords, interests
 from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
 import json
 import os
 
@@ -10,6 +9,7 @@ import os
 def create_slack_client():
     client = WebClient(token=os.environ.get("BOT_TOKEN"))
     return client
+
 
 class UpsertChannelKeywords(Resource):
     def post(self):
@@ -20,6 +20,7 @@ class UpsertChannelKeywords(Resource):
 
         else:
             return Response(json.dumps(return_data), status=400)
+
 
 class GetChannelKeyword(Resource):
     def get(self, channel_id):
@@ -38,6 +39,7 @@ class GetAllKeywords(Resource):
         else:
             return Response(json.dumps(return_data), status=400)
 
+
 class AddUserToChannel(Resource):
     def post(self):
         request_data = request.json
@@ -47,9 +49,6 @@ class AddUserToChannel(Resource):
             return Response(json.dumps(return_data), status=200)
         else:
             return Response(json.dumps(return_data), status=400)
-
-
-
 
 
 class GetAllChannelInfo(Resource):
