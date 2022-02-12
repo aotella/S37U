@@ -14,12 +14,10 @@ def create_slack_client():
 
 
 
-class UpsertChannel(Resource):
+class UpsertChannelKeywords(Resource):
     def post(self):
         request_data = request.json
-        if request_data is None:
-            return Response("Bad Request", status=400)
-        return_data = {"status":"success"} 
+        return_data = channel_keywords.update_channel_info(request_data)
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
 
@@ -35,6 +33,13 @@ class GetChannelKeyword(Resource):
             return Response(json.dumps(return_data), status=400)
 
 
+class GetAllKeywords(Resource):
+    def get(self):
+        return_data = channel_keywords.get_all_channel_info() 
+        if return_data["status"] == "success":
+            return Response(json.dumps(return_data), status=200)
+        else:
+            return Response(json.dumps(return_data), status=400)
 
 class AddUserToChannel(Resource):
     def post(self):
@@ -61,6 +66,16 @@ class UpdateUserInterest(Resource):
     def post(self):
         request_data = request.json
         return_data = interests.update_interests(request_data)
+        if return_data["status"] == "success":
+            return Response(json.dumps(return_data), status=200)
+        else:
+            return Response(json.dumps(return_data), status=400)
+
+
+
+class GetAllChannelInfo(Resource):
+    def get(self):
+        return_data = channel_keywords.get_all_channel_info()
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
         else:

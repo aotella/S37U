@@ -7,7 +7,8 @@ app = Flask(__name__)
 # two decorators, same function
 api = Api(app)
 
-api.add_resource(channel.UpsertChannel, '/api/v1/channel/')
+api.add_resource(channel.UpsertChannelKeywords, '/api/v1/channel/')
+api.add_resource(channel.GetAllChannelInfo, '/api/v1/channelkeyword/')
 api.add_resource(channel.GetChannelKeyword, '/api/v1/channel/<string:channel_id>')
 api.add_resource(channel.AddUserToChannel, '/api/v1/channel/add/')
 api.add_resource(channel.GetUserInterest, '/api/v1/userinterest/<string:user_id>')
