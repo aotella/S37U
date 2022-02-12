@@ -1,7 +1,8 @@
 import praw
-CLIENT_ID="Ag8Z4R8JjkMZyJn5Ip5IFQ"
-CLIENT_SECRET="0Klw_0qpO_tVYUhpsN1Z21Q0PnRaQQ"
-USER_AGENT="s37u-slack"
+import os
+CLIENT_ID=os.environ["CLIENT_ID"]
+CLIENT_SECRET=os.environ["CLIENT_SECRET"]
+USER_AGENT=os.environ["USER_AGENT"]
 
 
 def get_reddit_post(subreddit):
