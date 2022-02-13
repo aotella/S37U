@@ -26,10 +26,6 @@ def get_channel_list():
         logger.error(e)
         return []
 
-    # with open('common/channel_list.json') as f:
-    #     channel_data = json.loads(f.read())
-    # return channel_data["channel_list"]
-
 
 def get_channel_keywords_info_db(channel_name):
     pass

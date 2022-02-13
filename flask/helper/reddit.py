@@ -18,10 +18,6 @@ def get_subreddits_by_channel(channel_id):
     channel_subreddits = Channel.objects(channel_id=channel_id).first().to_json()
     return channel_subreddits["subreddits"]
 
-    # with open('common/keywords.json') as f:
-    #     channel_data = json.loads(f.read())
-    # return channel_data[channel]["subreddits"]
-
 
 def get_reddit_post(subreddit):
 

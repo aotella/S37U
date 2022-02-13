@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 def send_message(client, channel_id, msg_type, message):
     try:
         result = None
-        # Call the chat.postMessage method using the WebClient
         if msg_type == "post":
             post_title = message["post_title"]
             post_url = message["post_url"]

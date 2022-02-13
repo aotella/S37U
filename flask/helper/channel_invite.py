@@ -15,10 +15,6 @@ def get_channel_id_by_interest(channel_keyword):
     interests = Interests.objects(interest=channel_keyword).first().to_json()
     return interests["channels"]
 
-    # with open('common/interest-channel.json') as f:
-    #     channel_data = json.loads(f.read())
-    # return channel_data[channel_keyword]["channel_ids"]
-
 
 def send_channel_invitation(client, request_json):
 
@@ -34,7 +30,7 @@ def send_channel_invitation(client, request_json):
                 logger.info("user already in channel")
                 pass
             else:
-                message = f"Hi <!channel>,  <@{user_id}> wants to join your channel please invite them and greet them."
+                message = f"Hey! <@{user_id}> Wants to join your community! Add them, welcome them &  make them do a quick intro related to the community."
                 result = send_message.send_message(
                     client, channel_id, "message", message
                 )

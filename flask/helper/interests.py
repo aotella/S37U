@@ -43,17 +43,6 @@ def update_interests(request_json):
     except Exception as e:
         logger.error(e)
         return {"status": "failure", "message": "not updated"}
-    # if interests == []:
-    #     return {"status": "error", "message": "interest list empty"}
-
-    # interest_data[user_id] = interests
-
-    # if update_interest_data(interest_data):
-    #     interest_data = get_interest_data()
-    #     return {"status": "success", "data": interest_data[user_id]}
-
-    # else:
-    #     return {"status": "failure", "message": "update failed"}
 
 
 def get_interests(user_id):
@@ -70,14 +59,6 @@ def get_interests(user_id):
     except Exception as e:
         logger.error(e)
         return {"status": "failure", "message": "not updated"}
-
-    # interest_data = get_interest_data()
-    # users_interest = interest_data.get(user_id, "")
-
-    # if users_interest == "":
-    #     return {"status": "success", "data": []}
-    # else:
-    #     return {"status": "success", "data": users_interest}
 
 
 def get_channels_by_interest(interest):
