@@ -2,6 +2,8 @@
 
 ## Setup
 
+`cd flask`
+
 #### Create a virtual environment
 
 `python -m venv .venv`
@@ -16,5 +18,4 @@
 
 #### Start server
 
-`cd ..`
 `gunicorn -b 0.0.0.0:8000 wsgi:app`
