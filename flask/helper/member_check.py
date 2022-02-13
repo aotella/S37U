@@ -15,7 +15,7 @@ def return_channels_of_user(client, user_id):
             ).data
             for channels in result["channels"]:
                 if channels["is_channel"] == True:
-                    channel_ids.append(channels['id'])
+                    channel_ids.append(channels["id"])
 
             next_cursor = result["response_metadata"]["next_cursor"]
         return channel_ids

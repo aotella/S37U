@@ -1,4 +1,4 @@
-import logging 
+import logging
 import json
 from models import User, Interests
 
@@ -19,8 +19,8 @@ logger = logging.getLogger(__name__)
 #         logger.error(e)
 #         return 0
 
-def update_interests(request_json):
 
+def update_interests(request_json):
 
     # interest_data = get_interest_data()
 
@@ -32,14 +32,10 @@ def update_interests(request_json):
 
     try:
         user_obj = User.objects(user_id=user_id).first()
-        
+
         if not user_obj:
-            user = User(
-                user_id = user_id,
-                interests = interests
-            )
+            user = User(user_id=user_id, interests=interests)
             user.save()
-            print(type(user.to_json()))
             return {"status": "success", "data": user.to_json()}
         else:
             user_obj.update(interests=interests)
@@ -62,10 +58,9 @@ def update_interests(request_json):
 
 def get_interests(user_id):
 
-
     try:
         user_obj = User.objects(user_id=user_id).first()
-        
+
         if not user_obj:
             return {"status": "failure", "message": "user not found"}
 
@@ -91,22 +86,18 @@ def get_channels_by_interest(interest):
         interest_obj = Interests.objects(interest=interest)
 
         if not interest_obj:
-            return{"status": "failure", "message": "keyword not found"}
-        
+            return {"status": "failure", "message": "keyword not found"}
+
         interest_data = json.loads(interest_obj.to_json())
 
         return {"status": "success", "data": interest_data}
 
-
     except Exception as e:
         logger.error(e)
-        return{"status": "failure", "message": "something went wrong"}
-
-    
+        return {"status": "failure", "message": "something went wrong"}
 
     # with open('common/interest-channel.json') as f:
     #     interest_data = json.loads(f.read())
-
 
     # if interest_data == "":
     #     return{"status": "failure", "message": "keyword not found"}
@@ -121,7 +112,6 @@ def update_channel_for_interest(request_json):
         channel_ids = request_json["channels"]
 
         channel_obj = Interests.objects(interest=interest).first()
-
 
         channels_for_interest = channel_obj.channels
 

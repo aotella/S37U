@@ -5,6 +5,7 @@ from models import Channel
 
 logger = logging.getLogger(__name__)
 
+
 def get_channel_keywords_info():
 
     pass
@@ -13,9 +14,10 @@ def get_channel_keywords_info():
     #     channel_data = json.loads(f.read())
     # return channel_data
 
+
 def update_channel_keywords(keyword_data):
     try:
-        with open('common/keywords.json', 'w') as f:
+        with open("common/keywords.json", "w") as f:
             f.write(json.dumps(keyword_data))
         return 1
     except Exception as e:
@@ -25,7 +27,6 @@ def update_channel_keywords(keyword_data):
 
 def get_channel_keywords_info_db(channel_name):
     pass
-
 
 
 def get_all_channel_info():
@@ -39,7 +40,6 @@ def get_all_channel_info():
 
 def get_channel_info(channel_id):
 
-
     channel_data = Channel.objects(channel_id=channel_id).first().to_json()
     if channel_data is not None:
         return {"status": "success", "data": channel_data}
@@ -47,25 +47,20 @@ def get_channel_info(channel_id):
         return {{"status": "failure", "data": "channel not found"}}
 
     # channel_keyword_map = get_channel_keywords_info().get(channel_id, "")
-
-    # print(channel_keyword_map)
-
     # if channel_keyword_map == "":
     #     return{"status": "failure", "message": "keyword not found"}
 
-    # 
+    #
 
 
 def return_channel_name(channel_id):
     from slack_sdk import WebClient
-    import os 
+    import os
+
     client = WebClient(token=os.environ.get("BOT_TOKEN"))
 
-    channel_name = client.conversations_info(
-        channel=channel_id
-    ).data["channel"]["name"]
+    channel_name = client.conversations_info(channel=channel_id).data["channel"]["name"]
     return channel_name
-
 
 
 def update_channel_info(request_data):
@@ -81,22 +76,20 @@ def update_channel_info(request_data):
         if channel is None:
             channel_name = return_channel_name(channel_id)
             channel_obj = Channel(
-                channel_id = channel_id,
-                channel_name = channel_name, 
-                keywords = keywords,
-                subreddits = []
+                channel_id=channel_id,
+                channel_name=channel_name,
+                keywords=keywords,
+                subreddits=[],
             )
             channel_obj.save()
             return {"status": "success", "data": json.loads(channel_obj.to_json())}
 
-        
         else:
             channel.update(keywords=keywords)
             return {"status": "success", "data": json.loads(channel.to_json())}
     except Exception as e:
         logger.error(e)
         return {"status": "failure", "data": "keyword not updated"}
-
 
     # channel_keyword_map = get_channel_keywords_info()
 
@@ -110,7 +103,7 @@ def update_channel_info(request_data):
 
     # if channel_key == "":
     #     from slack_sdk import WebClient
-    #     import os 
+    #     import os
     #     channel_keyword_map[channel_id]  = {}
     #     channel_keyword_map[channel_id]["keywords"] = keywords
     #     channel_keyword_map[channel_id]["subreddits"] = []

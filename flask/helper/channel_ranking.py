@@ -13,13 +13,13 @@ logger = logging.getLogger(__name__)
 
 logger = logging.getLogger(__name__)
 
+
 def get_channel_list():
 
     try:
         return_data = []
-        channel_list = json.loads(Channel.objects().only('channel_id').to_json())
+        channel_list = json.loads(Channel.objects().only("channel_id").to_json())
         for channel in channel_list:
-            print(channel)
             return_data.append(channel["channel_id"])
         return return_data
     except Exception as e:
@@ -35,19 +35,17 @@ def get_channel_keywords_info_db(channel_name):
     pass
 
 
-
 def get_message_count(client, channel_id):
 
     try:
-        result = client.conversations_history(channel=channel_id, oldest=str(time.time()-259200))
+        result = client.conversations_history(
+            channel=channel_id, oldest=str(time.time() - 259200)
+        )
         count = len(result.data["messages"])
         return count
     except SlackApiError as e:
         logger.error(e)
         return 0
-        pass
-
-
 
 
 def return_channel_ranking(request_data):
@@ -58,8 +56,10 @@ def return_channel_ranking(request_data):
         channel_list = get_channel_list()
         ranking_data = []
         for channel in channel_list:
-            ranking_data.append({"channel_id": channel, "count": get_message_count(client, channel)})
-        ranking_data = (sorted(ranking_data, key = lambda i: i['count'], reverse=True))
+            ranking_data.append(
+                {"channel_id": channel, "count": get_message_count(client, channel)}
+            )
+        ranking_data = sorted(ranking_data, key=lambda i: i["count"], reverse=True)
         return {"status": "success", "data": ranking_data}
     except Exception as e:
         logger.error(e)

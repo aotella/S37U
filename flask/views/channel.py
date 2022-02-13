@@ -24,7 +24,7 @@ class UpsertChannelKeywords(Resource):
 
 class GetChannelKeyword(Resource):
     def get(self, channel_id):
-        return_data = channel_keywords.get_channel_info(channel_id) 
+        return_data = channel_keywords.get_channel_info(channel_id)
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
         else:
@@ -33,7 +33,7 @@ class GetChannelKeyword(Resource):
 
 class GetAllKeywords(Resource):
     def get(self):
-        return_data = channel_keywords.get_all_channel_info() 
+        return_data = channel_keywords.get_all_channel_info()
         if return_data["status"] == "success":
             return Response(json.dumps(return_data), status=200)
         else:
@@ -58,7 +58,6 @@ class GetAllChannelInfo(Resource):
             return Response(json.dumps(return_data), status=200)
         else:
             return Response(json.dumps(return_data), status=400)
-
 
 
 class GetChannelByInterests(Resource):

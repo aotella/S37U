@@ -21,4 +21,3 @@ class UpdateUserInterest(Resource):
             return Response(json.dumps(return_data), status=200)
         else:
             return Response(json.dumps(return_data), status=400)
-
