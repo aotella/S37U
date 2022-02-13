@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, Response
-from S37U.helper import interests
+from helper import interests
 import json
 
 

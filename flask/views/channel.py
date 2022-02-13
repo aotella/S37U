@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, Response
-from S37U.helper import channel_invite, channel_keywords, interests
+from helper import channel_invite, channel_keywords, interests
 from slack_sdk import WebClient
 import json
 import os

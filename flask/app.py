@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_restful import Api, Resource
-from S37U.views import channel, interest, reddit, ranking
+from views import channel, interest, reddit, ranking
 
 app = Flask(__name__)
 

@@ -1,17 +1,17 @@
-from S37U.helper import send_message
+from helper import send_message
 import logging
 import json
 
 logger = logging.getLogger(__name__)
 
 def get_channel_keywords_info():
-    with open('S37U/common/keywords.json') as f:
+    with open('common/keywords.json') as f:
         channel_data = json.loads(f.read())
     return channel_data
 
 def update_channel_keywords(keyword_data):
     try:
-        with open('S37U/common/keywords.json', 'w') as f:
+        with open('common/keywords.json', 'w') as f:
             f.write(json.dumps(keyword_data))
         return 1
     except Exception as e:

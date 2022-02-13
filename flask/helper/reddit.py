@@ -1,7 +1,7 @@
 from asyncio.log import logger
 from re import sub
 from site import execsitecustomize
-from S37U.helper import send_message
+from helper import send_message
 import praw
 import os
 import json
@@ -15,7 +15,7 @@ USER_AGENT=os.environ["USER_AGENT"]
 
 def get_subreddits_by_channel(channel):
 
-    with open('S37U/common/keywords.json') as f:
+    with open('common/keywords.json') as f:
         channel_data = json.loads(f.read())
     return channel_data[channel]["subreddits"]
 
@@ -25,8 +25,9 @@ def get_reddit_post(subreddit):
 
     post_data = {}
     reddit = praw.Reddit(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, user_agent=USER_AGENT)
-    top_posts = reddit.subreddit(subreddit).hot(limit=1, over_18=False)
+    top_posts = reddit.subreddit(subreddit).hot(limit=1)
     for post in top_posts:
+        print(post)
         post_data["post_url"] = post.url
         post_data["post_title"] = post.title
 

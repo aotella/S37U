@@ -1,4 +1,4 @@
-from S37U.helper import send_message, member_check
+from helper import send_message, member_check
 import logging
 import json
 
@@ -9,7 +9,7 @@ def get_channel_id(channel_name):
 
 
 def get_channel_id_by_interest(channel_keyword):
-    with open('S37U/common/interest-channel.json') as f:
+    with open('common/interest-channel.json') as f:
         channel_data = json.loads(f.read())
     return channel_data[channel_keyword]["channel_ids"]
 
@@ -25,6 +25,7 @@ def send_channel_invitation(client, request_json):
     try:
         for channel_id in channel_id_list:
             if channel_id in users_channel:
+                print("user already in channel")
                 pass
             else:
                 message = f"Hi <!channel>,  <@{user_id}> wants to join your channel please invite them and greet them."

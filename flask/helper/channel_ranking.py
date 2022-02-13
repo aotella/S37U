@@ -1,4 +1,4 @@
-from S37U.helper import send_message
+from helper import send_message
 import json
 import time
 import logging
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
 def get_channel_list():
-    with open('S37U/common/channel_list.json') as f:
+    with open('common/channel_list.json') as f:
         channel_data = json.loads(f.read())
     return channel_data["channel_list"]
 
@@ -29,6 +29,7 @@ def get_message_count(client, channel_id):
         count = len(result.data["messages"])
         return count
     except SlackApiError as e:
+        logger.info(e)
         return 0
         pass
 
@@ -43,7 +44,7 @@ def return_channel_ranking(request_data):
         ranking_data = []
         for channel in channel_list:
             ranking_data.append({"channel_id": channel, "count": get_message_count(client, channel)})
-        ranking_data = (sorted(ranking_data, key = lambda i: i['count'], reverse=True))[:3]
+        ranking_data = (sorted(ranking_data, key = lambda i: i['count'], reverse=True))
         return {"status": "success", "data": ranking_data}
     except Exception as e:
         logger.info(e)
