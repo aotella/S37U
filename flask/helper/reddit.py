@@ -6,6 +6,7 @@ import praw
 import os
 import json
 import random
+from models import Channel
 
 
 CLIENT_ID=os.environ["CLIENT_ID"]
@@ -13,11 +14,19 @@ CLIENT_SECRET=os.environ["CLIENT_SECRET"]
 USER_AGENT=os.environ["USER_AGENT"]
 
 
-def get_subreddits_by_channel(channel):
+def get_subreddits_by_channel(channel_id):
 
-    with open('common/keywords.json') as f:
-        channel_data = json.loads(f.read())
-    return channel_data[channel]["subreddits"]
+    print(channel_id)
+    channel_subreddits = Channel.objects(channel_id=channel_id).first().to_json()
+    print(type(channel_subreddits))
+
+    print(channel_subreddits["subreddits"])
+
+    return channel_subreddits["subreddits"]
+
+    # with open('common/keywords.json') as f:
+    #     channel_data = json.loads(f.read())
+    # return channel_data[channel]["subreddits"]
 
 
 def get_reddit_post(subreddit):
@@ -40,9 +49,12 @@ def update_post(client, request_json):
 
     subreddit_list = get_subreddits_by_channel(channel_id)
 
-    subreddit_data = random.choice(subreddit_list)
+    if subreddit_list != []:
+        subreddit_data = random.choice(subreddit_list)
+        post_data = get_reddit_post(subreddit_data)
 
-    post_data = get_reddit_post(subreddit_data)
+    else:
+        return {"status": "failure", "message": "no subreddit present"}
 
     try:
         send_message.send_message(client, channel_id, "post", post_data)

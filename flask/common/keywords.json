@@ -2,7 +2,7 @@
   "C0337BQ0SD7": {
     "channel_name": "crazy-ideas",
     "keywords": ["startup", "funding", "ideas", "fintech", "india", "lending"],
-    "subreddits": ["globaloffensive", "gaming"]
+    "subreddits": ["globaloffensive", "gaming"],
   },
   "C032E54V37H": {
     "channel_name": "football",
@@ -45,5 +45,10 @@
     "channel_name": "seeking-satoshi",
     "keywords": ["crypto", "bitcoin", "ethereum", "fintech"],
     "subreddits": ["crypto"]
+  },
+  "C032PHTUS8L": {
+    "keywords": ["Counter Strike"],
+    "subreddits": [],
+    "channel_name": "gaming"
   }
 }

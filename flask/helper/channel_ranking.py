@@ -2,9 +2,11 @@ from helper import send_message
 import json
 import time
 import logging
+from models import Channel
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import os
+import json
 
 
 logger = logging.getLogger(__name__)
@@ -12,9 +14,21 @@ logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
 def get_channel_list():
-    with open('common/channel_list.json') as f:
-        channel_data = json.loads(f.read())
-    return channel_data["channel_list"]
+
+    try:
+        return_data = []
+        channel_list = json.loads(Channel.objects().only('channel_id').to_json())
+        for channel in channel_list:
+            print(channel)
+            return_data.append(channel["channel_id"])
+        return return_data
+    except Exception as e:
+        logger.info(e)
+        return []
+
+    # with open('common/channel_list.json') as f:
+    #     channel_data = json.loads(f.read())
+    # return channel_data["channel_list"]
 
 
 def get_channel_keywords_info_db(channel_name):
@@ -39,6 +53,7 @@ def get_message_count(client, channel_id):
 def return_channel_ranking(request_data):
 
     client = WebClient(token=os.environ.get("BOT_TOKEN"))
+
     try:
         channel_list = get_channel_list()
         ranking_data = []

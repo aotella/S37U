@@ -1,25 +1,28 @@
-from asyncio.log import logger
+import logging 
 import json
-from urllib.parse import uses_fragment
+from models import User, Interests
 
-def get_interest_data():
-    with open('common/interest-user.json') as f:
-        interest_data = json.loads(f.read())
-    return interest_data
+logger = logging.getLogger(__name__)
+
+# def get_interest_data():
+#     with open('common/interest-user.json') as f:
+#         interest_data = json.loads(f.read())
+#     return interest_data
 
 
-def update_interest_data(interest_data):
-    try:
-        with open('common/interest-user.json', 'w') as f:
-            f.write(json.dumps(interest_data))
-        return 1
-    except Exception as e:
-        logger.info(e)
-        return 0
+# def update_interest_data(interest_data):
+#     try:
+#         with open('common/interest-user.json', 'w') as f:
+#             f.write(json.dumps(interest_data))
+#         return 1
+#     except Exception as e:
+#         logger.info(e)
+#         return 0
 
 def update_interests(request_json):
 
-    interest_data = get_interest_data()
+
+    # interest_data = get_interest_data()
 
     user_id = request_json["user_id"]
     interests = request_json["interests"]
@@ -27,35 +30,84 @@ def update_interests(request_json):
     if interests == []:
         return {"status": "error", "message": "interest list empty"}
 
-    interest_data[user_id] = interests
+    try:
+        user_obj = User.objects(user_id=user_id).first()
+        
+        if not user_obj:
+            user = User(
+                user_id = user_id,
+                interests = interests
+            )
+            user.save()
+            print(type(user.to_json()))
+            return {"status": "success", "data": user.to_json()}
+        else:
+            user_obj.update(interests=interests)
+            return {"status": "success", "data": request_json}
+    except Exception as e:
+        logger.error(e)
+        return {"status": "failure", "message": "not updated"}
+    # if interests == []:
+    #     return {"status": "error", "message": "interest list empty"}
 
-    if update_interest_data(interest_data):
-        interest_data = get_interest_data()
-        return {"status": "success", "data": interest_data[user_id]}
+    # interest_data[user_id] = interests
 
-    else:
-        return {"status": "failure", "message": "update failed"}
+    # if update_interest_data(interest_data):
+    #     interest_data = get_interest_data()
+    #     return {"status": "success", "data": interest_data[user_id]}
 
+    # else:
+    #     return {"status": "failure", "message": "update failed"}
 
 
 def get_interests(user_id):
 
-    interest_data = get_interest_data()
-    users_interest = interest_data.get(user_id, "")
 
-    if users_interest == "":
-        return {"status": "success", "data": []}
-    else:
+    try:
+        user_obj = User.objects(user_id=user_id).first()
+        
+        if not user_obj:
+            return {"status": "failure", "message": "user not found"}
+
+        users_interest = user_obj.to_json()["interests"]
         return {"status": "success", "data": users_interest}
+
+    except Exception as e:
+        logger.error(e)
+        return {"status": "failure", "message": "not updated"}
+
+    # interest_data = get_interest_data()
+    # users_interest = interest_data.get(user_id, "")
+
+    # if users_interest == "":
+    #     return {"status": "success", "data": []}
+    # else:
+    #     return {"status": "success", "data": users_interest}
 
 
 def get_channels_by_interest(interest):
 
-    with open('common/interest-channel.json') as f:
-        interest_data = json.loads(f.read())
+    try:
+        interest_obj = Interests.objects(interest=interest)
+
+        if not interest_obj:
+            return{"status": "failure", "message": "keyword not found"}
+        
+        interest_data = json.loads(interest_obj.to_json())
+
+        return {"status": "success", "data": interest_data}
 
 
-    if interest_data == "":
-        return{"status": "failure", "message": "keyword not found"}
+    except Exception as e:
+        logger.error(e)
+
+    
+
+    # with open('common/interest-channel.json') as f:
+    #     interest_data = json.loads(f.read())
+
+
+    # if interest_data == "":
+    #     return{"status": "failure", "message": "keyword not found"}
 
     return {"status": "success", "data": interest_data[interest]}

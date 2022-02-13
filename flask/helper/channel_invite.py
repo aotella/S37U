@@ -1,6 +1,7 @@
 from helper import send_message, member_check
 import logging
 import json
+from models import Interests
 
 logger = logging.getLogger(__name__)
 
@@ -9,9 +10,13 @@ def get_channel_id(channel_name):
 
 
 def get_channel_id_by_interest(channel_keyword):
-    with open('common/interest-channel.json') as f:
-        channel_data = json.loads(f.read())
-    return channel_data[channel_keyword]["channel_ids"]
+
+    interests = Interests.objects(interest=channel_keyword).first().to_json()
+    return interests["channels"]
+
+    # with open('common/interest-channel.json') as f:
+    #     channel_data = json.loads(f.read())
+    # return channel_data[channel_keyword]["channel_ids"]
 
 def send_channel_invitation(client, request_json):
 
@@ -20,7 +25,7 @@ def send_channel_invitation(client, request_json):
     user_id = request_json.get("user_id", "")
     for interest in interests:
         channel_id_list = channel_id_list + get_channel_id_by_interest(interest)
-
+    print(channel_id_list)
     users_channel = member_check.return_channels_of_user(client, user_id)
     try:
         for channel_id in channel_id_list:
