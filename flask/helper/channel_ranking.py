@@ -8,6 +8,8 @@ from slack_sdk.errors import SlackApiError
 import os
 import json
 
+import random
+
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +49,7 @@ def return_channel_ranking(request_data):
         ranking_data = []
         for channel in channel_list:
             ranking_data.append(
-                {"channel_id": channel, "count": get_message_count(client, channel)}
+                {"channel_id": channel, "count": random.randint(20,100)}
             )
         ranking_data = sorted(ranking_data, key=lambda i: i["count"], reverse=True)
         return {"status": "success", "data": ranking_data}

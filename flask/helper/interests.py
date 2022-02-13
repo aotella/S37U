@@ -34,7 +34,7 @@ def get_interests(user_id):
         user_obj = User.objects(user_id=user_id).first()
 
         if not user_obj:
-            return {"status": "failure", "message": "user not found"}
+            return {"status": "success", "data": []}
 
         users_interest = user_obj.to_json()["interests"]
         return {"status": "success", "data": users_interest}

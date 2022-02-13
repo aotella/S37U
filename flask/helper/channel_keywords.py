@@ -58,7 +58,7 @@ def update_channel_info(request_data):
 
         else:
             channel.update(keywords=keywords)
-            return {"status": "success", "data": json.loads(channel.to_json())}
+            return {"status": "success", "data": channel.to_json()}
     except Exception as e:
         logger.error(e)
         return {"status": "failure", "data": "keyword not updated"}
