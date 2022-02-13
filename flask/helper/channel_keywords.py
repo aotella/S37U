@@ -61,7 +61,7 @@ def update_channel_info(request_data):
         import os 
         channel_keyword_map[channel_id]  = {}
         channel_keyword_map[channel_id]["keywords"] = keywords
-        channel_keyword_map[channel_id]["subreddit"] = []
+        channel_keyword_map[channel_id]["subreddits"] = []
 
         client = WebClient(token=os.environ.get("BOT_TOKEN"))
 
