@@ -1,0 +1,65 @@
+display_information:
+  name: Bob
+  description: Bob is here to get micro-communities to flourish in your company.!
+  background_color: "#16348c"
+  long_description:
+    "Bob - The community bot that keeps companies engaged & happening! :star-struck: :handshake:\r
+
+    Building culture, a tight knit workplace and rapport among colleagues can be difficult, especially in the WFH world!\r
+
+    Bob allows companies to manage micro communities or interest groups with ease and keep the conversation going - fostering communication :loud_sound:  rapport building :handshake:  & engagement among employees.\r
+
+    Onboard employees into the office culture & interest groups that allow teammates to bond outside of work! :man-man-girl-girl:\r
+
+    Get employee interests and add them to groups  :heart_eyes:\r
+
+    Set tags or keywords to groups to enable community discovery :hash:\r
+
+    Inform groups and ask them to assimilate newbies into the group with warm welcomes! :pray::skin-tone-3:\r
+
+    Micro-community engagement\r
+
+    Starts conversations by automatically and periodically sharing articles on trending hashtags related to a community :rolled_up_newspaper:\r
+
+    Send customized prompts for communities to get users talking! :speech_balloon:\r
+
+    Keep track of community activation - recognize & reward the most active communities in your org! :trophy:\r
+
+    Try bob today to make the workplace more than just a workplace but a community of likeminded individuals!"
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: Bob
+    always_online: true
+oauth_config:
+  scopes:
+    user:
+      - channels:read
+      - channels:write
+    bot:
+      - users:read
+      - groups:write
+      - mpim:write
+      - im:write
+      - groups:read
+      - channels:read
+      - app_mentions:read
+      - channels:history
+      - channels:join
+      - im:history
+      - chat:write
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+      - message.channels
+      - message.im
+      - app_home_opened
+  interactivity:
+    is_enabled: true
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false
