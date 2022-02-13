@@ -8,7 +8,6 @@ import json
 import random
 from models import Channel
 
-
 CLIENT_ID=os.environ["CLIENT_ID"]
 CLIENT_SECRET=os.environ["CLIENT_SECRET"]
 USER_AGENT=os.environ["USER_AGENT"]
@@ -60,5 +59,5 @@ def update_post(client, request_json):
         send_message.send_message(client, channel_id, "post", post_data)
         return {"status": "success", "channel_id": channel_id, "post": post_data}
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return {"status": "failure", "message": "message not posted"}

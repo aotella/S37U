@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 #             f.write(json.dumps(interest_data))
 #         return 1
 #     except Exception as e:
-#         logger.info(e)
+#         logger.error(e)
 #         return 0
 
 def update_interests(request_json):

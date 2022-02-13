@@ -19,7 +19,7 @@ def update_channel_keywords(keyword_data):
             f.write(json.dumps(keyword_data))
         return 1
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return 0
 
 
@@ -73,7 +73,7 @@ def update_channel_info(request_data):
         channel_id = request_data["channel_id"]
         keywords = request_data["keywords"]
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return {"status": "failure", "message": "incorrect request"}
 
     try:
@@ -94,7 +94,7 @@ def update_channel_info(request_data):
             channel.update(keywords=keywords)
             return {"status": "success", "data": json.loads(channel.to_json())}
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return {"status": "failure", "data": "keyword not updated"}
 
 
@@ -104,7 +104,7 @@ def update_channel_info(request_data):
     #     channel_id = request_data["channel_id"]
     #     keywords = request_data["keywords"]
     # except Exception as e:
-    #     logger.info(e)
+    #     logger.error(e)
     #     return {"status": "failure", "message": "incorrect request"}
     # channel_key = channel_keyword_map.get(channel_id, "")
 

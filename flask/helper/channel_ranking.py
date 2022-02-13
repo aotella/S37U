@@ -23,7 +23,7 @@ def get_channel_list():
             return_data.append(channel["channel_id"])
         return return_data
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return []
 
     # with open('common/channel_list.json') as f:
@@ -43,7 +43,7 @@ def get_message_count(client, channel_id):
         count = len(result.data["messages"])
         return count
     except SlackApiError as e:
-        logger.info(e)
+        logger.error(e)
         return 0
         pass
 
@@ -62,5 +62,5 @@ def return_channel_ranking(request_data):
         ranking_data = (sorted(ranking_data, key = lambda i: i['count'], reverse=True))
         return {"status": "success", "data": ranking_data}
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return {"status": "failure", "message": "ranking not available"}

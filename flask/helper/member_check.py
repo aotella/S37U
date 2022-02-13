@@ -20,5 +20,5 @@ def return_channels_of_user(client, user_id):
             next_cursor = result["response_metadata"]["next_cursor"]
         return channel_ids
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return []

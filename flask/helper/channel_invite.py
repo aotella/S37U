@@ -37,5 +37,5 @@ def send_channel_invitation(client, request_json):
                 logger.info(result)
         return {"status": "success"} 
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
         return {"status": "failure"} 
