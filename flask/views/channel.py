@@ -68,3 +68,13 @@ class GetChannelByInterests(Resource):
             return Response(json.dumps(return_data), status=200)
         else:
             return Response(json.dumps(return_data), status=400)
+
+
+class UpdateChannelForInterests(Resource):
+    def post(self):
+        request_data = request.json
+        return_data = interests.update_channel_for_interest(request_data)
+        if return_data["status"] == "success":
+            return Response(json.dumps(return_data), status=200)
+        else:
+            return Response(json.dumps(return_data), status=400)

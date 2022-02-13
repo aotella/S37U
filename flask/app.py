@@ -26,6 +26,8 @@ api.add_resource(interest.UpdateUserInterest, '/api/v1/userinterest/') #Done
 api.add_resource(channel.GetChannelByInterests, '/api/v1/interestchannel/<string:interest>')
 api.add_resource(reddit.PostRedditArticleOnSlack, '/api/v1/redditpost/') #Done
 api.add_resource(ranking.GetChannelRanking, '/api/v1/ranking/') #done
+api.add_resource(channel.UpdateChannelForInterests, '/api/v1/interestchannel/') #done
+
 
 
 if __name__ == "__main__":

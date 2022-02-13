@@ -100,6 +100,7 @@ def get_channels_by_interest(interest):
 
     except Exception as e:
         logger.error(e)
+        return{"status": "failure", "message": "something went wrong"}
 
     
 
@@ -110,4 +111,24 @@ def get_channels_by_interest(interest):
     # if interest_data == "":
     #     return{"status": "failure", "message": "keyword not found"}
 
-    return {"status": "success", "data": interest_data[interest]}
+    # return {"status": "success", "data": interest_data[interest]}
+
+
+def update_channel_for_interest(request_json):
+
+    try:
+        interest = request_json["interest"]
+        channel_ids = request_json["channels"]
+
+        channel_obj = Interests.objects(interest=interest).first()
+
+
+        channels_for_interest = channel_obj.channels
+
+        new_interest_list = list(set(channels_for_interest).union(set(channel_ids)))
+        channel_obj.update(channels=new_interest_list)
+        return {"status": "success"}
+
+    except Exception as e:
+        logger.error(e)
+        return {"status": "failure"}

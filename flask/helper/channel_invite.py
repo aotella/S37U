@@ -25,7 +25,6 @@ def send_channel_invitation(client, request_json):
     user_id = request_json.get("user_id", "")
     for interest in interests:
         channel_id_list = channel_id_list + get_channel_id_by_interest(interest)
-    print(channel_id_list)
     users_channel = member_check.return_channels_of_user(client, user_id)
     try:
         for channel_id in channel_id_list:
