@@ -2,8 +2,6 @@
 
 ## Setup
 
-`cd flask`
-
 #### Create a virtual environment
 
 `python -m venv .venv`
