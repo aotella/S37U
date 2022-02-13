@@ -61,7 +61,6 @@ def get_channels_by_interest(interest):
         return {"status": "failure", "message": "something went wrong"}
 
 
-
 def update_channel_for_interest(request_json):
 
     try:

@@ -12,12 +12,12 @@ def create_slack_client():
 
 
 class PostRedditArticleOnSlack(Resource):
-    '''
+    
+    """
     endpoint :- "/api/v1/redditpost/"
     expected input :- {"channel_id": ""}
     Takes a channel id and randomly sends a post from reddit related to that keyword.
-    '''
-    
+    """
 
     def post(self):
         request_data = request.json
