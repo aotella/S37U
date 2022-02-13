@@ -11,9 +11,6 @@ import json
 
 logger = logging.getLogger(__name__)
 
-logger = logging.getLogger(__name__)
-
-
 def get_channel_list():
 
     try:
@@ -25,10 +22,6 @@ def get_channel_list():
     except Exception as e:
         logger.error(e)
         return []
-
-
-def get_channel_keywords_info_db(channel_name):
-    pass
 
 
 def get_message_count(client, channel_id):

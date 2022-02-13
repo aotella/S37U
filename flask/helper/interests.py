@@ -4,25 +4,8 @@ from models import User, Interests
 
 logger = logging.getLogger(__name__)
 
-# def get_interest_data():
-#     with open('common/interest-user.json') as f:
-#         interest_data = json.loads(f.read())
-#     return interest_data
-
-
-# def update_interest_data(interest_data):
-#     try:
-#         with open('common/interest-user.json', 'w') as f:
-#             f.write(json.dumps(interest_data))
-#         return 1
-#     except Exception as e:
-#         logger.error(e)
-#         return 0
-
 
 def update_interests(request_json):
-
-    # interest_data = get_interest_data()
 
     user_id = request_json["user_id"]
     interests = request_json["interests"]
@@ -77,13 +60,6 @@ def get_channels_by_interest(interest):
         logger.error(e)
         return {"status": "failure", "message": "something went wrong"}
 
-    # with open('common/interest-channel.json') as f:
-    #     interest_data = json.loads(f.read())
-
-    # if interest_data == "":
-    #     return{"status": "failure", "message": "keyword not found"}
-
-    # return {"status": "success", "data": interest_data[interest]}
 
 
 def update_channel_for_interest(request_json):

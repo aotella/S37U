@@ -6,16 +6,6 @@ from models import Channel
 logger = logging.getLogger(__name__)
 
 
-def update_channel_keywords(keyword_data):
-    try:
-        with open("common/keywords.json", "w") as f:
-            f.write(json.dumps(keyword_data))
-        return 1
-    except Exception as e:
-        logger.error(e)
-        return 0
-
-
 def get_channel_keywords_info_db(channel_name):
     pass
 

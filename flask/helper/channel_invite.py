@@ -6,10 +6,6 @@ from models import Interests
 logger = logging.getLogger(__name__)
 
 
-def get_channel_id(channel_name):
-    pass
-
-
 def get_channel_id_by_interest(channel_keyword):
 
     interests = Interests.objects(interest=channel_keyword).first().to_json()

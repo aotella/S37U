@@ -12,6 +12,13 @@ def create_slack_client():
 
 
 class GetChannelRanking(Resource):
+
+    '''
+    endpoint :- "/api/v1/ranking/"
+    expected input :- 
+    Returns ranking of all the channel associated with Bob.
+    '''
+
     def get(self):
         client = create_slack_client()
         return_data = channel_ranking.return_channel_ranking(client)
